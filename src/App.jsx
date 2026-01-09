@@ -309,60 +309,68 @@ const Hero = () => {
   const { displayText, blink } = useTypewriter(portfolioData.personal.tagline);
 
   return (
-    <section className="min-h-screen flex items-center pt-20 px-6 relative overflow-hidden bg-slate-950">
-      <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-950 px-4 sm:px-6 lg:px-16 pt-24">
+      
+      {/* Background Blobs */}
+      <div className="absolute -top-32 -right-32 w-72 h-72 sm:w-96 sm:h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse" />
       <div
-        className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] -z-10 animate-pulse"
+        className="absolute -bottom-32 -left-32 w-72 h-72 sm:w-96 sm:h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"
         style={{ animationDelay: '2s' }}
-      ></div>
+      />
 
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        
+        {/* LEFT CONTENT */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="text-center md:text-left"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-cyan-500/30 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-bold tracking-widest uppercase shadow-lg shadow-cyan-500/10">
-            <span className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></span>
+          <div className="inline-flex items-center gap-2 px-4 py-1 mb-6 border border-cyan-500/30 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-bold tracking-widest uppercase">
+            <span className="w-2 h-2 bg-cyan-400 rounded-full animate-ping" />
             System Online
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black text-white mb-6 leading-[0.9] tracking-tighter">
+          <h1 className="font-black text-white leading-tight tracking-tight
+            text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-6">
             Think <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
               Execute
-            </span>{' '}
+            </span>
             <br />
             Deploy
           </h1>
 
-          <div className="h-16 mb-6">
-            <p className="text-2xl md:text-3xl text-slate-400 font-light font-mono">
-              I am <span className="text-white font-bold">{displayText}</span>
+          {/* TYPEWRITER */}
+          <div className="h-14 sm:h-16 mb-6">
+            <p className="text-base sm:text-xl md:text-2xl text-slate-400 font-mono">
+              I am{' '}
+              <span className="text-white font-bold">{displayText}</span>
               <span
-                className={`inline-block w-3 h-8 ml-1 bg-cyan-500 align-middle ${
+                className={`inline-block w-2 h-6 ml-1 bg-cyan-500 align-middle ${
                   blink ? 'opacity-100' : 'opacity-0'
                 }`}
-              ></span>
+              />
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-4 mt-8">
-            <a href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer">
-            <MagneticButton className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all">
-              Download Resume
-            </MagneticButton>
+          {/* BUTTONS + SOCIAL */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6 mt-8 justify-center md:justify-start">
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+              <MagneticButton className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-xl font-bold transition-all hover:shadow-[0_0_25px_rgba(6,182,212,0.5)]">
+                Download Resume
+              </MagneticButton>
             </a>
-            <div className="flex items-center gap-4 px-6 border-l border-slate-700">
+
+            <div className="flex items-center gap-5 sm:border-l sm:border-slate-700 sm:pl-6 justify-center">
               {portfolioData.personal.social.map((s, i) => (
                 <a
                   key={i}
                   href={s.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-slate-400 hover:text-white text-2xl transition-all hover:scale-110"
+                  className="text-slate-400 hover:text-white text-xl sm:text-2xl transition-all hover:scale-110"
                 >
                   {s.icon}
                 </a>
@@ -371,29 +379,33 @@ const Hero = () => {
           </div>
         </motion.div>
 
+        {/* RIGHT IMAGE (HIDDEN ON MOBILE) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative hidden md:block perspective-1000"
+          className="relative hidden md:flex justify-center"
         >
           <motion.div
-            whileHover={{ rotateY: 10, rotateX: -10 }}
-            className="relative w-[400px] h-[500px] mx-auto bg-slate-900 rounded-2xl border border-slate-700 p-2 shadow-2xl"
+            whileHover={{ rotateY: 8, rotateX: -8 }}
+            className="relative w-[300px] lg:w-[360px] h-[420px] lg:h-[480px]
+              bg-slate-900 rounded-2xl border border-slate-700 p-2 shadow-2xl"
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 rounded-2xl z-0"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 rounded-2xl" />
+            
             <img
               src={portfolioData.personal.profileImage}
               alt="Profile"
-              className="w-full h-full object-cover object-[50%_37%] rounded-xl grayscale hover:grayscale-0 transition-all duration-500 relative z-10"
+              className="relative z-10 w-full h-full object-cover object-[50%_37%] rounded-xl grayscale hover:grayscale-0 transition-all duration-500"
             />
 
+            {/* FLOATING BADGES */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -right-12 top-25 bg-slate-900/90 backdrop-blur-md p-4 rounded-xl border border-slate-700 shadow-xl z-20 flex items-center gap-3"
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -right-10 bottom-30 bg-slate-900/90 backdrop-blur-md p-4 rounded-xl border border-slate-700 shadow-xl z-20 hidden md:flex items-center gap-3"
             >
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
+              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white">
                 <FaLaptopCode />
               </div>
               <div>
@@ -404,10 +416,10 @@ const Hero = () => {
 
             <motion.div
               animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -left-12 bottom-25 bg-slate-900/90 backdrop-blur-md p-4 rounded-xl border border-slate-700 shadow-xl z-20 flex items-center gap-3"
+              transition={{ duration: 6, repeat: Infinity }}
+              className="absolute -left-10 bottom-30 bg-slate-900/90 backdrop-blur-md p-4 rounded-xl border border-slate-700 shadow-xl z-20 hidden md:flex items-center gap-3"
             >
-              <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-green-500/30">
+              <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white">
                 <FaCheckCircle />
               </div>
               <div>
@@ -421,7 +433,6 @@ const Hero = () => {
     </section>
   );
 };
-
 const About = () => {
   return (
     <section id="about" className="py-24 bg-slate-900 relative overflow-hidden">
