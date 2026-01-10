@@ -91,7 +91,9 @@ const Starfield = () => {
 
     const initStars = () => {
       stars = [];
-      const numStars = Math.floor((width * height) / 5000);
+      const isSmall = width < 640; // reduce for phones
+      const density = isSmall ? 12000 : 5000;
+      const numStars = Math.floor((width * height) / density);
       for (let i = 0; i < numStars; i++) {
         stars.push({
           x: Math.random() * width,
@@ -149,6 +151,16 @@ const MagneticButton = ({ children, className, onClick }) => {
     setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
   };
 
+  const handleTouch = (e) => {
+    if (!e.touches || e.touches.length === 0) return;
+    const touch = e.touches[0];
+    const { clientX, clientY } = touch;
+    const { height, width, left, top } = ref.current.getBoundingClientRect();
+    const middleX = clientX - (left + width / 2);
+    const middleY = clientY - (top + height / 2);
+    setPosition({ x: middleX * 0.12, y: middleY * 0.12 });
+  };
+
   const reset = () => setPosition({ x: 0, y: 0 });
 
   const { x, y } = position;
@@ -160,6 +172,9 @@ const MagneticButton = ({ children, className, onClick }) => {
       transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
+      onTouchStart={handleTouch}
+      onTouchMove={handleTouch}
+      onTouchEnd={reset}
       onClick={onClick}
     >
       {children}
@@ -318,7 +333,7 @@ const Hero = () => {
         style={{ animationDelay: '2s' }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-2 gap-8 items-center">
         
         {/* LEFT CONTENT */}
         <motion.div
@@ -379,23 +394,24 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* RIGHT IMAGE (HIDDEN ON MOBILE) */}
+        {/* RIGHT IMAGE (VISIBLE on mobile now; responsive sizing) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative hidden md:flex justify-center"
+          className="relative flex justify-center"
         >
           <motion.div
             whileHover={{ rotateY: 8, rotateX: -8 }}
-            className="relative w-[300px] lg:w-[360px] h-[420px] lg:h-[480px]
+            className="relative w-[260px] sm:w-[300px] lg:w-[360px] h-[340px] sm:h-[420px] lg:h-[480px]
               bg-slate-900 rounded-2xl border border-slate-700 p-2 shadow-2xl"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 rounded-2xl" />
-            
             <img
               src={portfolioData.personal.profileImage}
               alt="Profile"
+              sizes="(max-width: 640px) 70vw, 360px"
+              srcSet={`${portfolioData.personal.profileImage} 1x`}
               className="relative z-10 w-full h-full object-cover object-[50%_37%] rounded-xl grayscale hover:grayscale-0 transition-all duration-500"
             />
 
