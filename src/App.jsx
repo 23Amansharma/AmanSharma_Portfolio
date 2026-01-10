@@ -333,7 +333,7 @@ const Hero = () => {
         style={{ animationDelay: '2s' }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-2 gap-8 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-2 gap-4 sm:gap-8 items-center">
         
         {/* LEFT CONTENT */}
         <motion.div
@@ -347,8 +347,10 @@ const Hero = () => {
             System Online
           </div>
 
-          <h1 className="font-black text-white leading-tight tracking-tight
-            text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-6">
+          <h1
+            className="font-black text-white leading-tight tracking-tight mb-6"
+            style={{ fontSize: 'clamp(1.6rem, 6vw, 4.5rem)' }}
+          >
             Think <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
               Execute
@@ -358,8 +360,11 @@ const Hero = () => {
           </h1>
 
           {/* TYPEWRITER */}
-          <div className="h-14 sm:h-16 mb-6">
-            <p className="text-base sm:text-xl md:text-2xl text-slate-400 font-mono">
+          <div className="h-12 sm:h-16 mb-6">
+            <p
+              className="text-slate-400 font-mono"
+              style={{ fontSize: 'clamp(0.9rem, 3.5vw, 1.25rem)' }}
+            >
               I am{' '}
               <span className="text-white font-bold">{displayText}</span>
               <span
