@@ -31,8 +31,8 @@ This portfolio is designed to be:
 
 ## 📸 Screenshots
 
-*(<img width="1366" height="629" alt="Screenshot (406)" src="https://github.com/user-attachments/assets/2a94a479-d5ae-4a4c-a50d-47d9c79a3d5b" />
-)*
+*<img width="1366" height="629" alt="Screenshot (406)" src="https://github.com/user-attachments/assets/2a94a479-d5ae-4a4c-a50d-47d9c79a3d5b" />
+*
 ---
 
 ## 🏃‍♂️ How to Run Locally
@@ -59,8 +59,8 @@ If you want to run this project on your local machine:
 ## 📫 Contact Me
 
 * **Website:** [aman-sharma.me](https://aman-sharma.me)
-* **LinkedIn:** [www.linkedin.com/in/aman-sharma-4aa314251]
-* **Email:** [amansharma881023@gmail.com]
+* **LinkedIn:** www.linkedin.com/in/aman-sharma-4aa314251
+* **Email:** amansharma881023@gmail.com
 
 ---
 
