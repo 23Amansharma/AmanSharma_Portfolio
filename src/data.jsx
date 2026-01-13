@@ -159,7 +159,7 @@ export const portfolioData = {
       title: 'IoT, Data Analytics & Industry Exposure',
       subtitle: 'Advanced Skill Development',
       description:
-        'Completed a 12-week Internet of Things course from NPTEL with Elite certification. Participated in Google Summer Script 2025. Earned a Data Analytics certification from IBM SkillsBuild on 30 August 2025. Also completed a Solution Architecture Job Simulation via Forage.',
+        'Completed a 12-week Internet of Things course from NPTEL with Elite certification. Participated in GirlScript Summer Of Code 2025. Earned a Data Analytics certification from IBM SkillsBuild on 30 August 2025. Also completed a Solution Architecture Job Simulation via Forage.',
       icon: 'cpu',
     },
 
@@ -550,3 +550,4 @@ icon: 'target',
     },
   ],
 };
+
