@@ -47,7 +47,7 @@ export const portfolioData = {
       'Solving Real-World Problems.',
     ],
     email: 'amansharma881023@gmail.com',
-    phone: '+91 9120082348',
+    phone: '#',
     location: 'Prayagraj, India',
     resumeLink:
       'https://drive.google.com/file/d/1hWs20YaN8p84CqNzJf9-L6IJnxvdKtU3/view?usp=drivesdk',
@@ -85,7 +85,7 @@ export const portfolioData = {
       },
       {
         icon: <FaEnvelope />,
-        link: 'amansharma881023@gmail.com',
+        link: 'https://mail.google.com/mail/?view=cm&fs=1&to=amansharma881023@gmail.com',
         label: 'Email',
       },
     ],
@@ -221,12 +221,12 @@ icon: 'target',
       {
         name: 'Bootstrap',
         icon: <SiBootstrap className="text-purple-600" />,
-        level: 90,
+        level: 70,
       },
       {
         name: 'Tailwind CSS',
         icon: <SiTailwindcss className="text-teal-400" />,
-        level: 85,
+        level: 65,
       },
     ],
 
@@ -258,7 +258,7 @@ icon: 'target',
       {
         name: 'Pandas & NumPy',
         icon: <SiPandas className="text-purple-600" />,
-        level: 85,
+        level: 75,
       },
       {
         name: 'Data Visualization',
@@ -281,7 +281,7 @@ icon: 'target',
       {
         name: 'Git & GitHub',
         icon: <SiGit className="text-red-500" />,
-        level: 85,
+        level: 80,
       },
       {
         name: 'VS Code',
