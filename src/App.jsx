@@ -1,15 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Ensure icons are imported
 import { portfolioData } from './data';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import {
   FaGithub,
   FaExternalLinkAlt,
   FaPlay,
+  FaPaperPlane,
   FaBars,
+  FaHome,
   FaTimes,
   FaEnvelope,
   FaLinkedin,
   FaArrowUp,
+  FaTerminal,
   FaClock,
   FaArrowRight,
   FaChevronLeft,
@@ -324,7 +327,7 @@ const Hero = () => {
   const { displayText, blink } = useTypewriter(portfolioData.personal.tagline);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-950 px-4 sm:px-6 lg:px-16 pt-24">
+    <section  className="relative min-h-screen flex items-center overflow-hidden bg-slate-950 px-4 sm:px-6 lg:px-16 pt-24">
       
       {/* Background Blobs */}
       <div className="absolute -top-32 -right-32 w-72 h-72 sm:w-96 sm:h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse" />
@@ -344,7 +347,7 @@ const Hero = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1 mb-6 border border-cyan-500/30 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-bold tracking-widest uppercase">
             <span className="w-2 h-2 bg-cyan-400 rounded-full animate-ping" />
-            System Online
+            OPEN TO WORK
           </div>
 
           <h1
@@ -353,7 +356,7 @@ const Hero = () => {
           >
             Think <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
-              Execute
+              Code
             </span>
             <br />
             Deploy
@@ -379,7 +382,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row sm:items-center gap-6 mt-8 justify-center md:justify-start">
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
               <MagneticButton className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-xl font-bold transition-all hover:shadow-[0_0_25px_rgba(6,182,212,0.5)]">
-                Download Resume
+                Resume
               </MagneticButton>
             </a>
 
@@ -454,88 +457,200 @@ const Hero = () => {
     </section>
   );
 };
-const About = () => {
-  return (
-    <section id="about" className="py-24 bg-slate-900 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Who is <span className="text-cyan-500">Aman?</span>
-          </h2>
-          <p className="text-slate-300 text-lg leading-relaxed mb-6">
-            {portfolioData.about.description}
-          </p>
-          <div className="flex flex-wrap gap-4 mb-8">
-            {portfolioData.about.highlights.map((item, idx) => (
-              <span
-                key={idx}
-                className="px-4 py-2 bg-slate-800 rounded-full text-sm text-cyan-300 border border-slate-700"
-              >
-                # {item}
-              </span>
-            ))}
-          </div>
-          <div className="grid grid-cols-3 gap-6">
-            {portfolioData.about.stats.map((stat, i) => (
-              <div
-                key={i}
-                className="text-center p-4 bg-slate-950 rounded-xl border border-slate-800"
-              >
-                <h3 className="text-3xl font-bold text-white mb-1">
-                  {stat.value}
-                </h3>
-                <p className="text-xs text-slate-500 uppercase">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="relative"
-        >
-          <div className="relative w-full aspect-square bg-gradient-to-br from-slate-900 to-slate-950 rounded-2xl border border-slate-700 p-8 flex flex-col justify-center shadow-2xl">
-            <FaBrain className="text-9xl text-slate-800 absolute top-4 right-4" />
-            <div className="space-y-4 relative z-10 font-mono text-sm">
-              <div className="flex gap-4 text-slate-500">
-                <span>01</span>
-                <span className="text-purple-400">class</span>
-                <span className="text-yellow-300">Aspiring Software Engineer</span>
-                <span className="text-slate-200">{`{`}</span>
+
+const About = () => {
+  const [showCode, setShowCode] = useState(false);
+
+  // Animation variants for typing effect
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1, // Typing speed control
+      },
+    },
+  };
+
+  const lineVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: { opacity: 1, x: 0 },
+  };
+
+  return (
+    <section id="about" className="py-12 md:py-24 bg-slate-900 relative overflow-hidden">
+      
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+          
+          {/* =========================================
+              LEFT SIDE: INFO & STATS
+             ========================================= */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="order-1"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
+              About <span className="text-cyan-500">Me?</span>
+            </h2>
+            
+            <p className="text-slate-300 text-sm md:text-lg leading-relaxed mb-6 text-left">
+              {portfolioData.about.description}
+            </p>
+            
+            {/* Tags / Highlights */}
+            <div className="flex flex-wrap gap-2 md:gap-4 mb-8">
+              {portfolioData.about.highlights.map((item, idx) => (
+                <span
+                  key={idx}
+                  className="px-3 py-1 md:px-4 md:py-2 bg-slate-800 rounded-full text-xs md:text-sm text-cyan-300 border border-slate-700 whitespace-nowrap"
+                >
+                  # {item}
+                </span>
+              ))}
+            </div>
+
+            {/* --- MOBILE ONLY: CODE TOGGLE BUTTON --- */}
+            <div className="block md:hidden mb-6">
+                <button 
+                    onClick={() => setShowCode(!showCode)}
+                    className="w-full relative group overflow-hidden py-3 rounded-lg font-bold text-sm shadow-lg flex items-center justify-center gap-2 transition-all border border-cyan-500/30"
+                >
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/80 to-blue-900/80 group-hover:scale-105 transition-transform duration-300" />
+                    <span className="relative z-10 text-cyan-100 flex items-center gap-2">
+                      {showCode ? <FaTerminal /> : <FaLaptopCode />}
+                      {showCode ? 'Close System ✖' : 'Initialize Neural Link_'}
+                    </span>
+                </button>
+            </div>
+
+            {/* Stats Section (Swipeable on Mobile) */}
+            <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-3 md:gap-4 pb-4 md:pb-0 no-scrollbar">
+              {portfolioData.about.stats.map((stat, i) => (
+                <div key={i} className="min-w-[120px] md:min-w-0 text-center p-4 bg-slate-950/50 backdrop-blur rounded-xl border border-slate-800 flex-shrink-0">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white">{stat.value}</h3>
+                  <p className="text-[10px] md:text-xs text-slate-500 uppercase tracking-wider">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* =========================================
+              RIGHT SIDE: FUTURISTIC TERMINAL (2050 Theme)
+             ========================================= */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            // Mobile: Hidden by default, Flex if toggled. Desktop: Always Flex.
+            className={`order-2 h-full items-center ${showCode ? 'flex' : 'hidden'} md:flex`}
+          >
+            {/* Terminal Window */}
+            <div className="relative w-full bg-[#0d1117] rounded-xl md:rounded-2xl border border-slate-700 shadow-2xl overflow-hidden mt-4 md:mt-0">
+              
+              {/* Header */}
+              <div className="bg-slate-800/50 p-3 flex items-center gap-2 border-b border-slate-700/50">
+                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+                <div className="ml-4 text-[10px] text-slate-400 font-mono">aman@neural-net:~/future-init</div>
               </div>
-              <div className="flex gap-4 text-slate-500 pl-8">
-                <span>02</span>
-                <span className="text-purple-400">constructor</span>
-                <span className="text-slate-200">() {`{`}</span>
-              </div>
-              <div className="flex gap-4 text-slate-500 pl-16">
-                <span>03</span>
-                <span className="text-blue-400">this</span>.name ={' '}
-                <span className="text-green-400">"Aman Sharma"</span>;
-              </div>
-              <div className="flex gap-4 text-slate-500 pl-16">
-                <span>04</span>
-                <span className="text-blue-400">this</span>.skills = [
-                <span className="text-green-400">"Gen AI"</span>,{' '}
-                <span className="text-green-400">"Full-Stack Dev"</span>];
-              </div>
-              <div className="flex gap-4 text-slate-500 pl-8">
-                <span>05</span>
-                <span className="text-slate-200">{`}`}</span>
-              </div>
-              <div className="flex gap-4 text-slate-500">
-                <span>06</span>
-                <span className="text-slate-200">{`}`}</span>
+
+              {/* Code Area */}
+              <div className="p-4 md:p-8 font-mono text-xs md:text-sm leading-relaxed overflow-x-auto relative min-h-[300px] flex flex-col justify-center">
+                
+                {/* Background Logo */}
+                <FaBrain className="text-9xl text-slate-800/20 absolute bottom-4 right-4 pointer-events-none rotate-12" />
+
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  key={showCode ? 'open' : 'closed'} 
+                >
+                  {/* Line 0: Meta Comments */}
+                  <motion.div variants={lineVariants} className="mb-4">
+                    <div className="text-slate-500">
+                      // <span className="text-cyan-500">Subject:</span> Aman_Sharma <br/>
+                      // <span className="text-cyan-500">Focus:</span> Building Practical Web Solutions
+                    </div>
+                  </motion.div>
+
+                  {/* Line 1: Function Declaration */}
+                  <motion.div variants={lineVariants} className="flex gap-4">
+                    <span className="text-slate-600 select-none">1</span>
+                    <div>
+                      <span className="text-purple-400">async</span> <span className="text-purple-400">function</span> <span className="text-yellow-300">BuildAndSolve</span><span className="text-slate-300">()</span> <span className="text-slate-300">{`{`}</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Line 2: Data Analyst Logic */}
+                  <motion.div variants={lineVariants} className="flex gap-4">
+                    <span className="text-slate-600 select-none">2</span>
+                    <div className="pl-4">
+                      <span className="text-purple-400">const</span> <span className="text-blue-400">solution</span> <span className="text-slate-300">=</span> <span className="text-purple-400">await</span> <span className="text-yellow-300">ProblemSolver</span>.<span className="text-blue-300">analyze</span><span className="text-slate-300">({`{`}</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Line 3: Input */}
+                  <motion.div variants={lineVariants} className="flex gap-4">
+                    <span className="text-slate-600 select-none">3</span>
+                    <div className="pl-8">
+                       <span className="text-slate-300">input:</span> <span className="text-green-400">"Real_world_Requirements"</span>,
+                    </div>
+                  </motion.div>
+
+                  {/* Line 4: Model */}
+                  <motion.div variants={lineVariants} className="flex gap-4">
+                    <span className="text-slate-600 select-none">4</span>
+                    <div className="pl-8">
+                       <span className="text-slate-300">tools:</span> <span className="text-green-400">["HTML5"</span><span className="text-green-400">"CSS3"</span><span className="text-green-400">"React"</span><span className="text-green-400">"JS"]</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Line 5: Closing Analysis */}
+                  <motion.div variants={lineVariants} className="flex gap-4">
+                    <span className="text-slate-600 select-none">5</span>
+                    <div className="pl-4">
+                      <span className="text-slate-300">{`});`}</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Line 6: Developer Logic */}
+                  <motion.div variants={lineVariants} className="flex gap-4">
+                    <span className="text-slate-600 select-none">6</span>
+                    <div className="pl-4">
+                       <span className="text-purple-400">return</span> <span className="text-blue-400">System</span>.<span className="text-yellow-300">deploy</span><span className="text-slate-300">({`{`}</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Line 7: Stack */}
+                  <motion.div variants={lineVariants} className="flex gap-4">
+                    <span className="text-slate-600 select-none">7</span>
+                    <div className="pl-8">
+                       <span className="text-slate-300">Output:</span> <span className="text-green-400">["Clean_Code","Scalable_Solutions"]</span>
+                    </div>
+                  </motion.div>
+
+                  {/* Line 8: Closing & Cursor */}
+                  <motion.div variants={lineVariants} className="flex gap-4">
+                    <span className="text-slate-600 select-none">8</span>
+                    <div className="pl-4">
+                       <span className="text-slate-300">{`});`}</span>
+                       <span className="text-slate-300 ml-4">{`}`}</span>
+                       <span className="animate-pulse ml-2 inline-block w-2 h-4 bg-cyan-400 align-middle"></span>
+                    </div>
+                  </motion.div>
+
+                </motion.div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
@@ -543,21 +658,21 @@ const About = () => {
 
 const Journey = () => {
   return (
-    <section
-      id="journey"
-      className="py-24 bg-slate-950 relative overflow-hidden"
-    >
-      <div className="absolute left-1/2 top-0 w-[2px] h-full bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent"></div>
+    <section id="journey" className="py-12 md:py-24 bg-slate-950 relative overflow-hidden">
+      
+      {/* Desktop Center Line */}
+      <div className="hidden md:block absolute left-1/2 top-0 w-[2px] h-full bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent"></div>
 
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center mb-10 md:mb-20">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4">
             My <span className="text-purple-500">Journey</span>
           </h2>
-          <p className="text-slate-400">From Hello World to Full-Stack Developer.</p>
+          <p className="text-slate-400 text-sm md:text-base">From Hello World to Full-Stack Developer.</p>
         </div>
 
-        <div className="space-y-12">
+        {/* --- DESKTOP VIEW (As it is) --- */}
+        <div className="hidden md:block space-y-12">
           {portfolioData.journey.map((item, idx) => (
             <motion.div
               key={idx}
@@ -569,75 +684,78 @@ const Journey = () => {
                 idx % 2 === 0 ? 'flex-row' : 'flex-row-reverse text-right'
               }`}
             >
-              <div
-                className={`w-1/2 ${
-                  idx % 2 === 0 ? 'text-right' : 'text-left'
-                }`}
-              >
-                <div className="text-cyan-400 font-mono text-xl font-bold mb-2">
-                  {item.year}
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1">
-                  {item.title}
-                </h3>
-                <span className="inline-block px-3 py-1 rounded-full bg-slate-900 text-xs text-slate-300 border border-slate-700 mb-3">
-                  {item.subtitle}
-                </span>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  {item.description}
-                </p>
+              <div className={`w-1/2 ${idx % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                <div className="text-cyan-400 font-mono text-xl font-bold mb-2">{item.year}</div>
+                <h3 className="text-2xl font-bold text-white mb-1">{item.title}</h3>
+                <span className="inline-block px-3 py-1 rounded-full bg-slate-900 text-xs text-slate-300 border border-slate-700 mb-3">{item.subtitle}</span>
+                <p className="text-slate-400 text-sm leading-relaxed">{item.description}</p>
               </div>
-
               <div className="relative flex items-center justify-center w-16">
-                <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,1)] z-10"></div>
-                <div className="absolute w-12 h-12 rounded-full border border-slate-700 bg-slate-900 flex items-center justify-center text-slate-400 -z-0">
-                  {item.icon === 'graduation' && <FaGraduationCap />}
-                  {item.icon === 'briefcase' && <FaBriefcase />}
-                  {item.icon === 'code' && <FaCode />}
-                  {item.icon === 'brain' && <FaBrain />}
-                </div>
+                 <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,1)] z-10"></div>
+                 <div className="absolute w-12 h-12 rounded-full border border-slate-700 bg-slate-900 flex items-center justify-center text-slate-400 -z-0">
+                    {item.icon === 'graduation' && <FaGraduationCap />}
+                    {item.icon === 'briefcase' && <FaBriefcase />}
+                    {item.icon === 'code' && <FaCode />}
+                 </div>
               </div>
-
               <div className="w-1/2"></div>
             </motion.div>
           ))}
         </div>
+
+        {/* --- MOBILE VIEW (Compact & Advanced) --- */}
+        <div className="md:hidden space-y-6 relative border-l-2 border-slate-800 ml-4 pl-6">
+          {portfolioData.journey.map((item, idx) => (
+             <div key={idx} className="relative">
+               {/* Dot on Line */}
+               <div className="absolute -left-[31px] top-1 w-3 h-3 bg-cyan-500 rounded-full border-2 border-slate-950 shadow-[0_0_10px_rgba(6,182,212,0.8)]"></div>
+               
+               <div className="flex flex-col items-start">
+                 <span className="text-cyan-400 font-mono text-xs font-bold bg-cyan-500/10 px-2 py-0.5 rounded mb-1">
+                   {item.year}
+                 </span>
+                 <h3 className="text-lg font-bold text-white leading-tight">{item.title}</h3>
+                 <span className="text-xs text-slate-500 mb-2">{item.subtitle}</span>
+                 <p className="text-xs text-slate-400 leading-snug">{item.description}</p>
+               </div>
+             </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );
 };
-
 const Skills = () => {
   const [activeTab, setActiveTab] = useState('programming');
 
   const tabs = [
-    { id: 'programming', label: 'Languages', icon: <FaCode /> },
-    { id: 'dataAnalytics', label: 'Data Analytics', icon: <FaChartBar /> },
-    { id: 'frontend', label: 'Frontend', icon: <FaLaptopCode /> },
-    { id: 'backend', label: 'Backend & DB', icon: <FaServer /> },
-    { id: 'toolsAiCloud', label: 'Tools, AI & Cloud', icon: <FaTools /> },
+    { id: 'programming', label: 'Code', icon: <FaCode /> }, // Label shortened for mobile
+    { id: 'dataAnalytics', label: 'Data', icon: <FaChartBar /> },
+    { id: 'frontend', label: 'Front-end', icon: <FaLaptopCode /> },
+    { id: 'backend', label: 'Back-end', icon: <FaServer /> },
+    { id: 'toolsAiCloud', label: 'Tools and AI', icon: <FaTools /> },
   ];
 
   return (
-    <section id="skills" className="py-24 bg-slate-950 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+    <section id="skills" className="py-12 md:py-24 bg-slate-950 relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4">
             Tech <span className="text-purple-500">Arsenal</span>
           </h2>
-          <p className="text-slate-400">
-            Comprehensive skill set across Development, Data, and AI.
-          </p>
+          <p className="text-slate-400 text-sm md:text-base">Comprehensive skill set.</p>
         </div>
 
-        <div className="flex justify-center gap-3 mb-12 flex-wrap">
+        {/* Tabs - Horizontal Scroll on Mobile */}
+        <div className="flex md:justify-center gap-2 md:gap-3 mb-8 md:mb-12 overflow-x-auto pb-2 px-2 no-scrollbar">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-5 py-3 rounded-full font-bold text-sm transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 md:px-5 md:py-3 rounded-full font-bold text-xs md:text-sm transition-all whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-white text-slate-900 shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105'
+                  ? 'bg-white text-slate-900 shadow-lg scale-105'
                   : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
               }`}
             >
@@ -646,42 +764,47 @@ const Skills = () => {
           ))}
         </div>
 
+        {/* --- DESKTOP VIEW (Big Cards) --- */}
         <motion.div
-          key={activeTab}
+          key={activeTab + '-desktop'}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {portfolioData.skills[activeTab]?.map((skill, idx) => (
-            <div
-              key={idx}
-              className="bg-slate-900 p-5 rounded-2xl border border-slate-800 hover:border-cyan-500/30 transition-all group"
-            >
+            <div key={idx} className="bg-slate-900 p-5 rounded-2xl border border-slate-800 hover:border-cyan-500/30 transition-all group">
               <div className="flex justify-between items-start mb-4">
                 <div className="text-3xl p-3 bg-slate-950 rounded-xl group-hover:scale-110 transition-transform text-slate-200">
                   {skill.icon}
                 </div>
-                <span className="text-lg font-bold text-cyan-500">
-                  {skill.level}%
-                </span>
+                <span className="text-lg font-bold text-cyan-500">{skill.level}%</span>
               </div>
-
-              <h3 className="text-lg font-bold text-white mb-2">
-                {skill.name}
-              </h3>
-
+              <h3 className="text-lg font-bold text-white mb-2">{skill.name}</h3>
               <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                  className="h-full bg-gradient-to-r from-cyan-500 to-purple-600"
-                />
+                <motion.div initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }} transition={{ duration: 1 }} className="h-full bg-gradient-to-r from-cyan-500 to-purple-600" />
               </div>
             </div>
           ))}
         </motion.div>
+
+        {/* --- MOBILE VIEW (Compact Grid / Chips) --- */}
+        <motion.div
+          key={activeTab + '-mobile'}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="md:hidden grid grid-cols-3 gap-2"
+        >
+          {portfolioData.skills[activeTab]?.map((skill, idx) => (
+            <div key={idx} className="bg-slate-900 p-3 rounded-lg border border-slate-800 flex flex-col items-center justify-center text-center gap-2">
+              <div className="text-2xl text-cyan-400">{skill.icon}</div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold text-white leading-tight">{skill.name}</span>
+                <span className="text-[9px] text-slate-500">{skill.level}%</span>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+        
       </div>
     </section>
   );
@@ -698,23 +821,23 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-24 bg-slate-900 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6"> {/* Mobile padding adjusted */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 gap-6">
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">
               Selected <span className="text-cyan-500">Work</span>
             </h2>
-            <p className="text-slate-400">
+            <p className="text-slate-400 text-sm md:text-base">
               Solving complex problems with code.
             </p>
           </div>
 
-          <div className="flex gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800">
+          <div className="flex gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800 overflow-x-auto">
             {filters.map((f) => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                className={`px-3 py-1.5 md:px-4 md:py-2 rounded-md text-xs md:text-sm font-medium transition-all whitespace-nowrap ${
                   filter === f
                     ? 'bg-cyan-600 text-white shadow-lg'
                     : 'text-slate-400 hover:text-white'
@@ -726,7 +849,8 @@ const Projects = () => {
           </div>
         </div>
 
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* --- YAHAN CHANGE KIYA HAI (Grid 2 columns mobile ke liye) --- */}
+        <motion.div layout className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
           <AnimatePresence>
             {filteredProjects.map((project) => (
               <motion.div
@@ -736,15 +860,18 @@ const Projects = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 key={project.id}
-                className="group bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all hover:-translate-y-2 flex flex-col h-full shadow-lg"
+                className="group bg-slate-950 rounded-xl md:rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all hover:-translate-y-2 flex flex-col h-full shadow-lg"
               >
-                <div className="h-48 overflow-hidden relative">
+                
+                {/* --- IMAGE HEIGHT CHANGE (Mobile: h-32, Desktop: h-48) --- */}
+                <div className="h-32 md:h-48 overflow-hidden relative">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                   />
-                  <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                  {/* Overlay icons only for desktop mostly */}
+                  <div className="hidden md:flex absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity items-center justify-center gap-4">
                     <a
                       href={project.videoLink}
                       className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-slate-900 hover:scale-110 transition"
@@ -752,51 +879,50 @@ const Projects = () => {
                       <FaPlay />
                     </a>
                   </div>
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-slate-950/80 backdrop-blur-md text-cyan-400 text-xs font-bold rounded-full border border-slate-700">
+                  <div className="absolute top-2 left-2 md:top-4 md:left-4">
+                    <span className="px-2 py-0.5 md:px-3 md:py-1 bg-slate-950/80 backdrop-blur-md text-cyan-400 text-[10px] md:text-xs font-bold rounded-full border border-slate-700">
                       {project.category}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition">
+                {/* --- CONTENT PADDING & FONT SIZE CHANGE --- */}
+                <div className="p-3 md:p-6 flex-1 flex flex-col">
+                  {/* Title Size: Mobile small, Desktop normal */}
+                  <h3 className="text-sm md:text-xl font-bold text-white mb-1 md:mb-2 group-hover:text-cyan-400 transition line-clamp-1">
                     {project.title}
                   </h3>
-                  <p className="text-slate-400 text-sm mb-4 line-clamp-3">
+                  
+                  {/* Desc Size: Mobile very small */}
+                  <p className="text-slate-400 text-[10px] md:text-sm mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 leading-tight">
                     {project.description}
                   </p>
 
-                  <div className="mt-auto mb-4 bg-slate-900 p-3 rounded-lg border border-slate-800">
-                    <p className="text-xs text-green-400 font-bold mb-1">
-                      IMPACT:
-                    </p>
-                    <p className="text-xs text-slate-300">{project.outcome}</p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((t, i) => (
+                  {/* Tags ko hide kar diya mobile pe taaki clean dikhe, ya size chhota kiya */}
+                  <div className="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-6 overflow-hidden h-6 md:h-auto">
+                    {project.tech.slice(0, 3).map((t, i) => ( // Mobile pe sirf 3 tags dikhayenge
                       <span
                         key={i}
-                        className="px-2 py-1 bg-slate-900 text-xs text-slate-300 rounded border border-slate-800"
+                        className="px-1.5 py-0.5 bg-slate-900 text-[9px] md:text-xs text-slate-300 rounded border border-slate-800 whitespace-nowrap"
                       >
                         {t}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex justify-between items-center border-t border-slate-800 pt-4 mt-auto">
+                  {/* Buttons Section */}
+                  <div className="flex justify-between items-center border-t border-slate-800 pt-2 md:pt-4 mt-auto">
                     <a
                       href={project.repoLink}
-                      className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition"
+                      className="flex items-center gap-1 md:gap-2 text-[10px] md:text-sm text-slate-400 hover:text-white transition"
                     >
-                      <FaGithub /> Code
+                      <FaGithub className="text-xs md:text-base" /> Code
                     </a>
                     <a
                       href={project.liveLink}
-                      className="flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition"
+                      className="flex items-center gap-1 md:gap-2 text-[10px] md:text-sm text-cyan-400 hover:text-cyan-300 transition"
                     >
-                      Live Demo <FaExternalLinkAlt />
+                      Live <FaExternalLinkAlt className="text-xs md:text-base" />
                     </a>
                   </div>
                 </div>
@@ -808,28 +934,34 @@ const Projects = () => {
     </section>
   );
 };
-
 // CERTIFICATES SECTION
+
 const Certificates = () => {
   return (
     <section
       id="certificates"
-      className="py-24 bg-slate-950 border-t border-slate-800 relative overflow-hidden"
+      className="py-12 md:py-24 bg-slate-950 border-t border-slate-800 relative overflow-hidden"
     >
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] -z-10"></div>
 
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        
+        {/* Header */}
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4">
             My <span className="text-cyan-500">Certifications</span>
           </h2>
-          <p className="text-slate-400">
+          <p className="text-slate-400 text-sm md:text-base">
             Validating skills with global standards.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* =========================================================
+            DESKTOP VIEW: GRID LAYOUT (Jaisa aapka pehle tha)
+            Class: hidden md:grid (Mobile pe gayab, Desktop pe grid)
+           ========================================================= */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
           {portfolioData.certificates.map((cert, idx) => (
             <motion.a
               key={idx}
@@ -843,7 +975,7 @@ const Certificates = () => {
               className="group relative bg-slate-900 p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition-all hover:-translate-y-2 flex flex-col items-center text-center shadow-lg"
             >
               <div
-                className={`w-16 h-16 rounded-full bg-slate-950 flex items-center justify-center text-3xl mb-6 ${cert.color} group-hover:scale-110 transition-transform shadow-md`}
+                className={`w-16 h-16 rounded-full bg-slate-950 flex items-center justify-center text-3xl mb-6 ${cert.color || 'text-cyan-400'} group-hover:scale-110 transition-transform shadow-md`}
               >
                 <FaAward />
               </div>
@@ -856,10 +988,65 @@ const Certificates = () => {
                 {cert.date}
               </span>
 
+              {/* Hover Overlay */}
               <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
             </motion.a>
           ))}
         </div>
+
+        {/* =========================================================
+            MOBILE VIEW: HORIZONTAL SCROLL / CAROUSEL
+            Class: md:hidden (Desktop pe gayab, Mobile pe dikhega)
+           ========================================================= */}
+        <div className="md:hidden">
+            {/* Scroll Container */}
+            <div className="flex overflow-x-auto gap-4 pb-6 px-2 snap-x snap-mandatory no-scrollbar">
+                {portfolioData.certificates.map((cert, idx) => (
+                    <motion.a
+                        key={idx}
+                        href={cert.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                        viewport={{ once: true }}
+                        // Styling: Fixed width (min-w) taaki cards squish na ho
+                        className="snap-center min-w-[280px] bg-slate-900/80 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 flex flex-col items-center text-center relative overflow-hidden"
+                    >
+                        {/* Corner Icon for Link */}
+                        <div className="absolute top-4 right-4 text-slate-600 text-xs">
+                            <FaExternalLinkAlt />
+                        </div>
+
+                        {/* Icon */}
+                        <div className={`w-12 h-12 rounded-full bg-slate-950 flex items-center justify-center text-2xl mb-4 ${cert.color || 'text-cyan-400'} shadow-sm`}>
+                            <FaAward />
+                        </div>
+
+                        {/* Text Content */}
+                        <h3 className="text-base font-bold text-white mb-1 leading-tight">
+                            {cert.title}
+                        </h3>
+                        <p className="text-xs text-slate-400 mb-3">{cert.issuer}</p>
+                        
+                        {/* Date Tag */}
+                        <span className="text-[10px] text-slate-500 font-mono bg-slate-950 px-3 py-1 rounded-full border border-slate-800/50">
+                            {cert.date}
+                        </span>
+
+                        {/* Decoration Line */}
+                        <div className="w-full h-1 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent absolute bottom-0 left-0"></div>
+                    </motion.a>
+                ))}
+            </div>
+            
+            {/* Helper Text for Swipe */}
+            <div className="flex justify-center items-center gap-2 text-slate-600 text-xs animate-pulse mt-[-10px]">
+                <span>← Swipe to see more →</span>
+            </div>
+        </div>
+
       </div>
     </section>
   );
@@ -937,46 +1124,52 @@ const Feedback = () => {
 };
 
 const Blogs = () => (
-  <section id="blog" className="py-24 bg-slate-900 border-t border-slate-800">
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-white mb-4">
+  <section id="blog" className="py-12 md:py-24 bg-slate-900 border-t border-slate-800">
+    <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="text-center mb-8 md:mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 md:mb-4">
           Tech <span className="text-purple-500">Insights</span>
         </h2>
-        <p className="text-slate-400">Exploring AI, Data, and System Design.</p>
+        <p className="text-slate-400 text-sm">Exploring AI & Systems.</p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8">
+      {/* --- GRID CHANGE: Mobile grid-cols-2 --- */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
         {portfolioData.blogs.map((blog) => (
           <div
             key={blog.id}
-            className="group bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all shadow-lg"
+            className="group bg-slate-950 border border-slate-800 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-all shadow-lg flex flex-col"
           >
-            <div className="h-48 overflow-hidden">
+            {/* Image Height reduced for mobile */}
+            <div className="h-24 md:h-48 overflow-hidden">
               <img
                 src={blog.image}
                 alt={blog.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
             </div>
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-3 text-xs text-slate-500">
+            
+            <div className="p-3 md:p-6 flex-1 flex flex-col">
+              <div className="flex justify-between items-center mb-1 md:mb-3 text-[8px] md:text-xs text-slate-500">
                 <span className="text-cyan-400 font-bold">{blog.category}</span>
                 <span className="flex items-center gap-1">
                   <FaClock /> {blog.readTime}
                 </span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition line-clamp-2">
+              
+              <h3 className="text-xs md:text-xl font-bold text-white mb-1 md:mb-3 line-clamp-2">
                 {blog.title}
               </h3>
-              <p className="text-slate-400 text-sm mb-4 line-clamp-3">
+              
+              <p className="text-slate-400 text-[9px] md:text-sm mb-2 md:mb-4 line-clamp-2">
                 {blog.excerpt}
               </p>
+              
               <a
                 href={blog.link}
-                className="inline-flex items-center gap-2 text-sm font-bold text-white hover:gap-3 transition-all"
+                className="mt-auto inline-flex items-center gap-1 text-[9px] md:text-sm font-bold text-white hover:gap-2 transition-all"
               >
-                Read Article <FaArrowRight />
+                Read <FaArrowRight />
               </a>
             </div>
           </div>
@@ -985,126 +1178,206 @@ const Blogs = () => (
     </div>
   </section>
 );
-
+// --- 1. CONTACT SECTION ---
 const Contact = () => {
+  const [formStatus, setFormStatus] = useState('idle'); // idle, submitting, success
+
   return (
-    <section id="contact" className="pt-14 pb-24 bg-slate-950 relative scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 className="text-5xl font-bold text-white mb-6">
-            Open to <span className="text-cyan-500">Opportunities</span>
-          </h2>
-          <p className="text-slate-400 text-lg mb-8">
-            Actively seeking entry level-roles or internships as a{' '}
-            <strong>
-              Software Engineer , Data Analyst , or AI Intern
-            </strong>
-            .
-          </p>
+    <section id="contact" className="py-16 md:py-24 bg-slate-950 relative overflow-hidden">
+      {/* Background Gradients */}
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] -z-10"></div>
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-cyan-600/10 rounded-full blur-[100px] -z-10"></div>
 
-          <div className="space-y-6">
-            <div className="flex items-center gap-4 bg-slate-900 p-4 rounded-xl border border-slate-800">
-              <div className="w-12 h-12 bg-cyan-500/20 text-cyan-500 rounded-lg flex items-center justify-center text-2xl">
-                <FaEnvelope />
-              </div>
-              <div>
-                <p className="text-sm text-slate-500">Email Me</p>
-                <p className="text-white font-bold text-lg">
-                  {portfolioData.personal.email}
-                </p>
-              </div>
-            </div>
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+          
+          {/* LEFT SIDE: INFO & CONNECT */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
+              Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Connect.</span>
+            </h2>
+            <p className="text-slate-400 text-sm md:text-lg mb-8 leading-relaxed">
+              Seeking opportunities as <strong className="text-white">SDE</strong> or <strong className="text-white">Data Analyst</strong>. 
+              Always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+            </p>
 
-            <div className="flex items-center gap-4 bg-slate-900 p-4 rounded-xl border border-slate-800">
-              <div className="w-12 h-12 bg-purple-500/20 text-purple-500 rounded-lg flex items-center justify-center text-2xl">
-                <FaLinkedin />
-              </div>
-              <div>
-                <p className="text-sm text-slate-500">Connect</p>
-                <p className="text-white font-bold text-lg">LinkedIn Profile</p>
-              </div>
-            </div>
-          </div>
-        </div>
+            <div className="space-y-4">
+              {/* Email Card */}
+              <a href={`mailto:${portfolioData.personal?.email || 'email@example.com'}`} className="flex items-center gap-4 bg-slate-900/50 p-4 rounded-xl border border-slate-800 hover:border-cyan-500/50 transition-all group cursor-pointer">
+                <div className="w-12 h-12 bg-cyan-500/10 text-cyan-500 rounded-lg flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                  <FaEnvelope />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Mail me at</p>
+                  <p className="text-white font-mono text-sm md:text-base group-hover:text-cyan-400 transition-colors">
+                    {portfolioData.personal?.email || 'aman@example.com'}
+                  </p>
+                </div>
+              </a>
 
-        <form
-          action="https://formspree.io/f/xnjnekgw"
-          method="POST"
-          className="bg-slate-900 p-8 rounded-3xl border border-slate-800 shadow-2xl"
-        >
-          <div className="space-y-4">
-            <div>
-              <label className="text-sm text-slate-400 ml-1">Name</label>
-              <input
-                type="text"
-                name="name"
-                required
-                className="w-full mt-1 px-5 py-4 bg-slate-950 border border-slate-800 rounded-xl text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition"
-                placeholder="Recruiter Name"
-              />
+              {/* LinkedIn Card */}
+              <a href={portfolioData.personal?.social?.[1]?.link || '#'} target="_blank" rel="noreferrer" className="flex items-center gap-4 bg-slate-900/50 p-4 rounded-xl border border-slate-800 hover:border-purple-500/50 transition-all group cursor-pointer">
+                <div className="w-12 h-12 bg-purple-500/10 text-purple-500 rounded-lg flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                  <FaLinkedin />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Let's connect</p>
+                  <p className="text-white font-mono text-sm md:text-base group-hover:text-purple-400 transition-colors">
+                    LinkedIn Profile
+                  </p>
+                </div>
+              </a>
             </div>
-            <div>
-              <label className="text-sm text-slate-400 ml-1">Email</label>
-              <input
-                type="email"
-                name="email"
-                required
-                className="w-full mt-1 px-5 py-4 bg-slate-950 border border-slate-800 rounded-xl text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition"
-                placeholder="recruiter@company.com"
-              />
-            </div>
-            <div>
-              <label className="text-sm text-slate-400 ml-1">Message</label>
-              <textarea
-                rows="4"
-                name="message"
-                required
-                className="w-full mt-1 px-5 py-4 bg-slate-950 border border-slate-800 rounded-xl text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition resize-none"
-                placeholder="Hi Aman, we have an opening for Data Analyst..."
-              ></textarea>
-            </div>
+          </motion.div>
 
-            <button
-              type="submit"
-              className="w-full py-4 rounded-xl font-bold text-lg transition-all bg-gradient-to-r from-cyan-600 to-purple-600 hover:shadow-lg text-white transform active:scale-95"
+          {/* RIGHT SIDE: MODERN FORM (Glassmorphism) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} 
+            className="relative"
+          >
+            <form
+              action="https://formspree.io/f/xnjnekgw" // Formspree link verified
+              method="POST"
+              className="bg-slate-900/80 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-slate-800 shadow-2xl relative z-10"
             >
-              Send Message
-            </button>
-          </div>
-        </form>
+              <h3 className="text-xl font-bold text-white mb-6">Send a Message 🚀</h3>
+              
+              <div className="space-y-4">
+                <div className="group">
+                  <input 
+                    type="text" 
+                    name="name" 
+                    required 
+                    placeholder="Your Name"
+                    className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white text-sm outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder:text-slate-600" 
+                  />
+                </div>
+                
+                <div className="group">
+                  <input 
+                    type="email" 
+                    name="email" 
+                    required 
+                    placeholder="Your Email"
+                    className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white text-sm outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder:text-slate-600" 
+                  />
+                </div>
+                
+                <div className="group">
+                  <textarea 
+                    rows="4" 
+                    name="message" 
+                    required 
+                    placeholder="How can we help each other?"
+                    className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white text-sm outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all resize-none placeholder:text-slate-600"
+                  ></textarea>
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="w-full py-3 rounded-lg font-bold text-sm bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] active:scale-95 transition-all flex items-center justify-center gap-2"
+                >
+                  Send Message <FaPaperPlane className="text-xs" />
+                </button>
+              </div>
+            </form>
+            
+            {/* Decorative behind form */}
+            <div className="absolute -top-4 -right-4 w-full h-full border-2 border-slate-800 rounded-2xl -z-0 hidden md:block"></div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
 };
 
+// --- 2. MOBILE NAVIGATION (Floating Dock Style) ---
+const MobileNav = () => {
+  const navItems = [
+    { id: 'about', icon: <FaHome />, label: 'Home' },
+    { id: 'projects', icon: <FaLaptopCode />, label: 'Work' },
+    { id: 'skills', icon: <FaTools />, label: 'Skills' },
+    { id: 'contact', icon: <FaEnvelope />, label: 'Contact' },
+  ];
+
+  return (
+    <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[350px] bg-slate-900/90 backdrop-blur-md border border-white/10 rounded-full z-50 shadow-2xl px-6 py-3 flex justify-between items-center">
+      {navItems.map((item) => (
+        <a 
+          key={item.id}
+          href={`#${item.id}`} 
+          className="flex flex-col items-center text-slate-400 hover:text-cyan-400 transition-colors group relative"
+        >
+           {/* Icon Hover Bounce Effect */}
+           <div className="text-xl mb-1 group-active:scale-90 transition-transform">
+             {item.icon}
+           </div>
+           <span className="text-[10px] font-medium opacity-70 group-hover:opacity-100">{item.label}</span>
+           
+           {/* Active Dot Indicator (Optional visual flair) */}
+           <span className="absolute -bottom-2 w-1 h-1 bg-cyan-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        </a>
+      ))}
+    </div>
+  );
+};
+
+// --- 3. FOOTER ---
 const Footer = () => (
-  <footer className="bg-slate-950 border-t border-slate-800 py-12">
+  <footer className="bg-slate-950 border-t border-slate-900 py-8 md:py-12 relative z-10">
     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div>
+      
+      {/* Brand & Copy */}
+      <div className="text-center md:text-left">
         <h3 className="text-2xl font-bold text-white mb-2">
           {portfolioData.personal.name}
+          <span className="text-cyan-500">.</span>
         </h3>
         <p className="text-slate-500 text-sm">
-          © {new Date().getFullYear()}. Aspiring Software Engineer | AI and  Web Development.
+          © {new Date().getFullYear()} Crafted with code & passion | AI and Full-stack Development.
         </p>
       </div>
-      <div className="flex gap-4">
-        {portfolioData.personal.social.map((s, i) => (
-          <a
-            key={i}
-            href={s.link}
-            target="_blank"
-            rel="noreferrer"
-            className="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-slate-400 hover:bg-white hover:text-black transition-all"
-          >
-            {s.icon}
-          </a>
-        ))}
+
+      {/* Social Icons & Back to Top */}
+      <div className="flex items-center gap-6">
+        <div className="flex gap-4">
+          {portfolioData.personal.social.map((s, i) => (
+            <a
+              key={i}
+              href={s.link}
+              target="_blank"
+              rel="noreferrer"
+              className="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white transition-all hover:-translate-y-1 shadow-lg"
+            >
+              {s.icon}
+            </a>
+          ))}
+        </div>
+        
+        {/* Back to Top Button (Small) */}
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="w-10 h-10 rounded-lg border border-slate-800 flex items-center justify-center text-slate-500 hover:text-white hover:border-slate-600 transition-all md:flex hidden"
+          title="Back to Top"
+        >
+          <FaArrowUp />
+        </button>
       </div>
     </div>
+    
+    {/* Mobile Nav Spacer (Taaki footer content nav ke peeche na chupe) */}
+    <div className="h-20 md:hidden"></div>
   </footer>
 );
 
+// Export (Agar ek hi file me hai to remove karein)
 function App() {
   return (
     <div className="bg-slate-950 min-h-screen w-full overflow-x-hidden text-white font-sans selection:bg-cyan-500 selection:text-white cursor-none-md">
@@ -1133,6 +1406,7 @@ function App() {
         <Feedback />
         <Contact />
         <Footer />
+        <MobileNav />
         <ScrollToTop />
       </motion.div>
     </div>
