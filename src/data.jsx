@@ -64,11 +64,6 @@ export const portfolioData = {
         label: 'LinkedIn',
       },
       {
-        icon: <FaRocket/>,
-        link: 'https://unstop.com/u/amansha2910',
-        label: 'Unstop',
-      },
-      {
         icon: <SiHackerrank />,
         link: 'https://www.hackerrank.com/profile/AmanSharma2_3',
         label: 'hackerrank',
@@ -550,5 +545,6 @@ icon: 'target',
     },
   ],
 };
+
 
 
