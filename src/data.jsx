@@ -92,7 +92,7 @@ export const portfolioData = {
       'I am a final-year B.Tech student at AKTU specializing in Computer Science & Engineering. I bridge the gap between raw data and actionable software solutions using Python, Java, and modern AI tools. My passion lies in building intelligent systems that solve real-world challenges.',
     stats: [
       { label: 'Projects', value: '5+' },
-      { label: 'Code Commits', value: '450+' },
+      { label: 'Code Commits', value: '600+' },
       { label: 'Certifications', value: '10+' },
     ],
     highlights: [
