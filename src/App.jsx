@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'; // Ensure icons are imported
 import { portfolioData } from './data';
+import VisitorCounter from './components/VisitorCounter'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import {
   FaGithub,
@@ -1397,6 +1398,7 @@ function App() {
         <Starfield />
         <Navbar />
         <Hero />
+        <VisitorCounter />
         <About />
         <Journey />
         <Skills />
