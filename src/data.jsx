@@ -496,7 +496,7 @@ icon: 'target',
   feedback: [
     {
       id: 1,
-      name: 'Ayush Vashishth',
+      name: 'Aniket kumar',
       role: 'System Engineer',
       text: 'Aman demonstrates exceptional analytical skills. His approach to the Face Recognition project showed deep understanding of CNNs.',
       image:
