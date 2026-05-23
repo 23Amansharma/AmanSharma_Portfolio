@@ -303,16 +303,16 @@ icon: 'target',
   projects: [
     {
       id: 1,
-      title: 'InterviewAI',
+      title: 'Intivolution-AI Interview',
       category: 'Data/AI',
       description:
         'AI-based interview assistance system focused on analyzing interview responses using NLP techniques and basic data analytics to provide structured feedback.',
-      tech: ['Python', 'NLP', 'Data Analytics', 'React'],
+      tech: ['Next.js 14', 'Gemini AI', 'Clerk, NeonDB', 'Drizzle ORM'],
       outcome:
-        'Helped automate basic interview feedback generation based on keywords and response structure.',
+        'Helped automate basic interview feedback and suggestion generation based on keywords and response structure.',
       image:
         'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800',
-      repoLink: '#',
+      repoLink: 'https://github.com/23Amansharma/Multimodel_Explainable-AI',
       liveLink: '#',
       videoLink: '#',
     },
@@ -336,7 +336,7 @@ icon: 'target',
         'Automated attendance process and reduced manual effort while improving accuracy.',
       image:
         'https://images.unsplash.com/photo-1555952494-efd681c7e3f9?auto=format&fit=crop&q=80&w=800',
-      repoLink: '#',
+      repoLink: 'https://github.com/23Amansharma/Face-Recognition-Attendance-System-',
       liveLink: '#',
       videoLink: '#',
     },
@@ -359,20 +359,20 @@ icon: 'target',
     },
 
     {
-      id: 4,
-      title: 'Car Rental Management System',
-      category: 'Software',
-      description:
-        'Desktop-based car rental management system developed during summer training to manage bookings, customers, and vehicle records.',
-      tech: ['Core Java', 'OOP', 'MySQL', 'JDBC'],
-      outcome:
-        'Improved understanding of object-oriented design, database connectivity, and real-world application workflow.',
-      image:
-        'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800',
-      repoLink: '#',
-      liveLink: '#',
-      videoLink: '#',
-    },
+  id: 4,
+  title: 'GetSmark - Smart Task Manager',
+  category: 'Full Stack',
+  description:
+    'A full-stack team task management application with OTP-based email authentication, project creation, task assignment, and real-time email notifications for team collaboration.',
+  tech: ['React', 'Vite', 'Spring Boot', 'Java', 'MongoDB', 'JWT', 'Brevo API', 'Railway', 'Vercel'],
+  outcome:
+    'Gained hands-on experience in full-stack development, REST API design, JWT authentication, email integration, and cloud deployment with custom domain configuration.',
+  image:
+    'https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&q=80&w=800',
+  repoLink: 'https://github.com/23Amansharma/GetSmark---TaskManager',
+  liveLink: 'https://getsmark.app',
+  videoLink: 'https://drive.google.com/file/d/15fi8LY1bShE5Uxta1eo8eXhOzFJ4QNar/view?usp=drive_link',
+},
 
     {
       id: 5,
