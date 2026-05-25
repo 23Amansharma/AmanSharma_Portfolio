@@ -313,7 +313,7 @@ icon: 'target',
       image:
         'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800',
       repoLink: 'https://github.com/23Amansharma/Multimodel_Explainable-AI',
-      liveLink: '#',
+      liveLink: 'https://xai-interview-preparation.vercel.app/',
       videoLink: '#',
     },
 
