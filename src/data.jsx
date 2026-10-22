@@ -51,7 +51,7 @@ export const portfolioData = {
     phone: '#',
     location: 'Prayagraj, India',
     resumeLink:
-      'https://drive.google.com/file/d/1wDSJKERtEUcjpbgpR35BnE0T8tUzqusf/view?usp=drive_link',
+      'https://drive.google.com/drive/folders/1MakkYFIMrPbsTh64xZISQPzWl6P1-3d3',
     profileImage: '/aman.jpeg',
     social: [
       {
