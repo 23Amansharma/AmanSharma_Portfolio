@@ -42,9 +42,9 @@ export const portfolioData = {
     name: 'Aman Sharma',
     role: 'Software Engineer & Data Analyst',
     tagline: [
-      'Building Scalable Software.',
-      'Analyzing Data for Decisions.',
-      'Solving Real-World Problems.',
+      'Creating through Curiosity.',
+      'Learning by Building.',
+      'Growing with Every Challenges.',
     ],
     email: 'amansharma881023@gmail.com',
     phone: '#',
@@ -78,6 +78,11 @@ export const portfolioData = {
         link: 'https://leetcode.com/u/Aman_Sharma23/',
         label: 'Leetcode',
       },
+         { 
+  icon: <SiMedium />, 
+  link: 'https://23amansharma.medium.com/', 
+  label: 'Medium', 
+},
       {
         icon: <FaEnvelope />,
         link: 'https://mail.google.com/mail/?view=cm&fs=1&to=amansharma881023@gmail.com',
@@ -89,10 +94,10 @@ export const portfolioData = {
   about: {
     title: 'About Me',
     description:
-      'I am a final-year B.Tech student at AKTU specializing in Computer Science & Engineering. I bridge the gap between raw data and actionable software solutions using Python, Java, and modern AI tools. My passion lies in building intelligent systems that solve real-world challenges.',
+      ' I’m a Computer Science graduate from AKTU with a passion for software development and problem-solving. I build practical applications using Java, Python, React, Next.js, and Spring Boot, with a growing interest in AI-powered solutions. I enjoy turning ideas into functional products and continuously improving my skills by building real-world projects.',
     stats: [
       { label: 'Projects', value: '5+' },
-      { label: 'Code Commits', value: '750+' },
+      { label: 'Code Commits', value: '1.1K+' },
       { label: 'Certifications', value: '10+' },
     ],
     highlights: [
@@ -175,6 +180,14 @@ description:
   'Currently in the final year of B.Tech CSE. Focused on consolidating skills in AI, Data Analytics, IoT, and software development. Developed InterviewAI — an AI-powered interview preparation assistant as a final year project, aimed at enhancing real-time interview practice, analysis, and career readiness while preparing for placements and real-world technical roles.',
 icon: 'target',
     },
+    {
+  year: '2026 – Present',
+  title: 'Building, Learning & Exploring',
+  subtitle: 'Software Development | AI | Problem Solving',
+  description:
+    'Currently focused on strengthening my software development and problem-solving skills while preparing for GATE 2027. Building AI-powered applications, exploring modern technologies, and practicing Data Structures and Algorithms. Also working on personal projects and exploring ideas around entrepreneurship, with a long-term vision of building impactful products of my own.',
+  icon: 'target',
+},
   ],
 
   // 5 Categories as requested
@@ -512,36 +525,26 @@ icon: 'target',
     },
   ],
   // Paste this INSIDE portfolioData, just after the feedback array
-  blogs: [
+ blogs: [
     {
       id: 1,
-      title: 'How AI is Changing Software Engineering',
-      date: 'Oct 15, 2025',
+      title: 'What Responsibility Taught Me About Life',
+      date: '2026',
       excerpt:
-        'Exploring the impact of Large Language Models on daily coding workflows.',
+        'Reflections on how taking ownership and responsibility changes your perspective on life and personal growth.',
       image:
-        'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800',
-      link: '#',
+        'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800',
+      link: 'https://23amansharma.medium.com/what-responsibility-taught-me-about-life-02d2461e63d5',
     },
     {
       id: 2,
-      title: 'The Future of IoT in Healthcare',
-      date: 'Sept 28, 2025',
+      title: 'Is a Job the Ultimate Goal of Life?',
+      date: '2026',
       excerpt:
-        'Smart sensors and real-time monitoring are revolutionizing patient care.',
+        'Questioning traditional career milestones and looking deeper into purpose beyond standard employment.',
       image:
-        'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800',
-      link: '#',
-    },
-    {
-      id: 3,
-      title: 'Understanding React Server Components',
-      date: 'Aug 10, 2025',
-      excerpt:
-        'A deep dive into how RSCs improve performance and user experience.',
-      image:
-        'https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800',
-      link: '#',
+        'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=800',
+      link: 'https://23amansharma.medium.com/is-a-job-the-ultimate-goal-of-life-6ba1d20af7fd',
     },
   ],
 };
