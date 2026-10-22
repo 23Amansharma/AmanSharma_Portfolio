@@ -35,6 +35,7 @@ import {
   SiBootstrap,
   SiTailwindcss,
   SiJupyter,
+  SiMedium,
 } from 'react-icons/si';
 
 export const portfolioData = {
